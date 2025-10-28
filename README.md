@@ -53,3 +53,56 @@ A smart and streamlined Python tool that automates your entire meeting workflow 
     ```bash
     python main.py
     ```
+
+
+Developer Diary — Google Meet Scheduler
+ Overview
+This project demonstrates an integration between Google Calendar, Google Meet, and Gmail APIs to automate the scheduling and invitation process for meetings.
+It allows the user to:
+•	Schedule a meeting by entering its title, date, time, duration, and recipient details
+•	Automatically generate a Google Meet link
+•	Add the recipient as an attendee (meeting appears in their calendar)
+•	Send a personalized professional email with meeting details
+•	Copy the Meet link directly to the clipboard for convenience
+________________________________________
+ How I Approached the Task
+1. Setup and Exploration
+•	Started by setting up a new Python environment and installing the required dependencies:
+	 pip install google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2 pyperclip
+•	Created a Google Cloud project and enabled the following APIs:
+o	Google Calendar API
+o	Gmail API
+•	Downloaded the credentials.json file and placed it in the working directory for OAuth authentication.
+2. Initial Implementation
+•	Followed Google’s quickstart examples for the Calendar API to create and list events.
+•	Extended the logic to insert a new event with conferenceData to auto-generate a Google Meet link.
+•	Added Gmail API integration to send meeting details via email.
+•	Implemented clipboard support using pyperclip to copy the Meet link instantly.
+3. Key Design Decisions
+•	Used OAuth 2.0 with token persistence (token.json) to simplify repeated runs.
+•	Added interactive input prompts (title, date, time, duration, recipient) to make the script user-friendly and demo-ready.
+•	Included the recipient as an event attendee and used sendUpdates='all' to automatically send Google Calendar invitations.
+•	Chose to keep the user email template clean and professional, suitable for real-world use by a developer advocate.
+________________________________________
+ Issues and How I Solved Them
+Issue	Description	Solution
+Authentication Scope Error	Gmail API returned 403: Insufficient Permission when sending emails.	Deleted token.json and re-authenticated after adding https://www.googleapis.com/auth/gmail.send to SCOPES.
+Package Import Error (pyparsing)	Older Python version caused an AttributeError in pyparsing.	Installed Python 3.11 and re-installed dependencies in a clean environment.
+Event not visible to recipient	The event appeared only in the organizer’s calendar.	Added the recipient as an attendee and set sendUpdates='all' in the events.insert() call.
+Clipboard support not working	Windows environment needed an external library.	Installed and used the pyperclip package for reliable cross-platform clipboard access.
+________________________________________
+ Resources and Documentation Used
+•	Google API Python Client Documentation:
+https://developers.google.com/api-client-library/python/
+•	Google Calendar API Guides:
+https://developers.google.com/calendar/api/guides/create-events
+•	Gmail API Documentation:
+https://developers.google.com/gmail/api
+•	OAuth 2.0 Setup and Consent Screen Configuration:
+https://developers.google.com/identity/protocols/oauth2
+•	Pyperclip library documentation for clipboard handling.
+________________________________________
+Reflection
+This task provided a great opportunity to explore how different Google APIs can work together to build a complete, real-world workflow.
+I focused on developer experience by making the script simple, interactive, and extensible — aligning with the mindset of a Developer Advocate who bridges engineering with communication and usability.
+
