@@ -86,9 +86,13 @@ o	Gmail API
 ________________________________________
  Issues and How I Solved Them
 Issue	Description	Solution
-Authentication Scope Error	Gmail API returned 403: Insufficient Permission when sending emails.	Deleted token.json and re-authenticated after adding https://www.googleapis.com/auth/gmail.send to SCOPES.
-Package Import Error (pyparsing)	Older Python version caused an AttributeError in pyparsing.	Installed Python 3.11 and re-installed dependencies in a clean environment.
-Event not visible to recipient	The event appeared only in the organizer’s calendar.	Added the recipient as an attendee and set sendUpdates='all' in the events.insert() call.
+Authentication Scope Error	Gmail API returned 403: Insufficient Permission when sending emails.	
+Deleted token.json and re-authenticated after adding https://www.googleapis.com/auth/gmail.send to SCOPES.
+Package Import Error (pyparsing):	
+Older Python version caused an AttributeError in pyparsing.	Installed Python 3.11 and re-installed dependencies in a clean environment.
+Event not visible to recipient:	
+The event appeared only in the organizer’s calendar.	
+Added the recipient as an attendee and set sendUpdates='all' in the events.insert() call.
 Clipboard support not working	Windows environment needed an external library.	Installed and used the pyperclip package for reliable cross-platform clipboard access.
 ________________________________________
  Resources and Documentation Used
